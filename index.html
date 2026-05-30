@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StegoVault — Image Steganography Tool</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0c10;
@@ -16,8 +15,8 @@
     --danger: #ff4757;
     --text: #e2e8f0;
     --muted: #4a5568;
-    --font-mono: 'Share Tech Mono', monospace;
-    --font-head: 'Syne', sans-serif;
+    --font-mono: 'Times New Roman', serif;
+    --font-head: 'Times New Roman', serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -154,7 +153,7 @@
     font-size: 0.8rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #c9c9c9;
     margin-bottom: 20px;
   }
 
@@ -186,7 +185,7 @@
     display: block;
   }
 
-  .drop-text { color: var(--muted); font-size: 0.85rem; }
+  .drop-text { color: #c9c9c9; font-size: 0.85rem; }
   .drop-text span { color: var(--accent); }
 
   /* Preview */
@@ -242,7 +241,7 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 12px 14px;
-    color: var(--text);
+    color: #c9c9c9;
     font-family: var(--font-mono);
     font-size: 0.85rem;
     outline: none;
@@ -255,7 +254,7 @@
     display: block;
     font-size: 0.75rem;
     letter-spacing: 1px;
-    color: var(--muted);
+    color: #c9c9c9;
     text-transform: uppercase;
     margin-bottom: 8px;
     margin-top: 16px;
@@ -413,7 +412,7 @@
     margin-bottom: 10px;
   }
 
-  .step-text { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+  .step-text { font-size: 0.78rem; color: #c9c9c9; line-height: 1.5; }
 
   /* Loading spinner */
   .spinner {
@@ -445,7 +444,7 @@
   <header>
     <div class="logo">StegoVault</div>
     <div class="tagline">Image Steganography Tool</div>
-    <div class="badge">▸ LSB Encoding · PNG · BMP</div>
+    <div class="badge">▸ LSB Encoding · PNG · JPG · BMP · WEBP · All Formats</div>
   </header>
 
   <div class="tabs">
@@ -460,9 +459,9 @@
     <div class="card">
       <div class="card-title">◈ Step 1 — Upload Cover Image</div>
       <div class="dropzone" id="encode-drop">
-        <input type="file" id="encode-img-input" accept="image/png,image/bmp" onchange="handleEncodeImage(this)">
+        <input type="file" id="encode-img-input" accept="image/*" onchange="handleEncodeImage(this)">
         <span class="drop-icon">🖼️</span>
-        <div class="drop-text">Drop PNG or BMP image here<br><span>or click to browse</span></div>
+        <div class="drop-text">Drop any image here (PNG, JPG, BMP, WEBP...)<br><span>or click to browse</span></div>
       </div>
       <div class="preview-wrap" id="encode-preview-wrap">
         <img id="encode-preview" src="" alt="Preview">
@@ -508,9 +507,9 @@
     <div class="card">
       <div class="card-title">◈ Step 1 — Upload Stego Image</div>
       <div class="dropzone" id="decode-drop">
-        <input type="file" id="decode-img-input" accept="image/png,image/bmp" onchange="handleDecodeImage(this)">
+        <input type="file" id="decode-img-input" accept="image/*" onchange="handleDecodeImage(this)">
         <span class="drop-icon">🔍</span>
-        <div class="drop-text">Drop encoded PNG or BMP image here<br><span>or click to browse</span></div>
+        <div class="drop-text">Drop any encoded image here (PNG, JPG, BMP, WEBP...)<br><span>or click to browse</span></div>
       </div>
       <div class="preview-wrap" id="decode-preview-wrap">
         <img id="decode-preview" src="" alt="Preview">
@@ -639,7 +638,7 @@ function handleEncodeImage(input) { if (input.files[0]) processEncodeFile(input.
 function handleDecodeImage(input) { if (input.files[0]) processDecodeFile(input.files[0]); }
 
 function processEncodeFile(file) {
-  if (!file.type.match(/png|bmp/)) { showAlert('encode-alert', 'error', 'Only PNG or BMP images are supported.'); return; }
+  if (!file.type.match(/image\/.*/)) { showAlert('encode-alert', 'error', 'Only image files are supported.'); return; }
   const reader = new FileReader();
   reader.onload = e => {
     const img = new Image();
@@ -665,7 +664,7 @@ function processEncodeFile(file) {
 }
 
 function processDecodeFile(file) {
-  if (!file.type.match(/png|bmp/)) { showAlert('decode-alert', 'error', 'Only PNG or BMP images are supported.'); return; }
+  if (!file.type.match(/image\/.*/)) { showAlert('decode-alert', 'error', 'Only image files are supported.'); return; }
   const reader = new FileReader();
   reader.onload = e => {
     const img = new Image();
